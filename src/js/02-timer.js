@@ -51,6 +51,8 @@ function onDateCheck(selectedDates) {
     Report.failure('"Please choose a date in the future" <br/><br/>- Тобто дату та час яка ще не настала');
 }
 
+
+
 function timerStart() {
     intervalID = setInterval(() => {
         currentdate = new Date().getTime();
