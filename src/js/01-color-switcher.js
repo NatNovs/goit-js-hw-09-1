@@ -16,19 +16,33 @@ function getRandomHexColor() {
 } 
 
 
-
-function onBtnStartRainbow() {
-    refs.btnStart.disabled = true;
-    refs.btnStop.disabled = false;
-
-    idInterval = setInterval(() => {
-        refs.body.style.backgroundColor = getRandomHexColor();
-    }, RAINBOW_DELAY);
+function bgColorChanger(){
+    body.style.backgroundColor = getRandomHexColor();
+    if(btnStart.getAttribute("disabled")){
+        setTimeoutHandler = setTimeout(() => {
+            bgColorChanger()
+        },RAINBOW_DELAY)
+    }
 }
 
-function onBtnStopRainbow() {
-    refs.btnStart.disabled = false;
-    refs.btnStop.disabled = true;
-
-    clearInterval(idInterval);
+btnStart.addEventListener("click", (ev) => {
+    if(!ev.target.getAttribute("disabled")){
+        ev.target.setAttribute("disabled","disabled")
     }
+    btnStop.removeAttribute("disabled")
+    bgColorChanger()
+})
+
+btnStop.addEventListener("click", (ev) => {
+    if(!btnStart.getAttribute("disabled")){
+        return 
+    }
+    if(!ev.target.getAttribute("disabled")){
+        ev.target.setAttribute("disabled","disabled")
+    }
+    btnStart.removeAttribute("disabled")
+    if(setTimeoutHandler){
+        clearTimeout(setTimeoutHandler)
+    }
+    setTimeoutHandler = 0
+})
