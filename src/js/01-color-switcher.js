@@ -1,15 +1,7 @@
-const RAINBOW_DELAY = 1000;
-let idInterval = null;
-
-const refs = {
-    btnStart: document.querySelector('button[data-start]'),
-    btnStop: document.querySelector('button[data-stop]'),
-    body: document.querySelector('body'),
-};
-
-refs.btnStop.disabled = true;
-refs.btnStart.addEventListener('click', onBtnStartRainbow);
-refs.btnStop.addEventListener('click', onBtnStopRainbow);
+const btnStart = document.querySelector("[data-start]")
+const btnStop = document.querySelector("[data-stop]")
+const body = document.querySelector("body")
+let setTimeoutHandler = 0
 
 function getRandomHexColor() {
     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
@@ -21,7 +13,7 @@ function bgColorChanger(){
     if(btnStart.getAttribute("disabled")){
         setTimeoutHandler = setTimeout(() => {
             bgColorChanger()
-        },RAINBOW_DELAY)
+        }, 1000)
     }
 }
 
